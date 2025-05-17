@@ -1,3 +1,3 @@
-# PojokanPay - ISP Management System
+# pojokanPay
 
-Final Version v1.0
+Aplikasi manajemen pelanggan internet, keuangan, SDM, inventori, pajak & fee mitra.

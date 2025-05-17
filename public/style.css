@@ -1,0 +1,40 @@
+:root {
+  --header-height: 60px;
+  --sidebar-width: 220px;
+  --brand-color: #007bff;
+  --bg-light: #f4f6f9;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: Arial, sans-serif; background-color: var(--bg-light); height: 100%; }
+/* Login Page */
+.login-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; padding: 1rem; }
+.login-card { background: var(--card-bg); padding: 2rem; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); width: 100%; max-width: 360px; text-align: center; }
+.login-card .logo { width: 80px; margin-bottom: 1rem; }
+.login-card h1 { margin-bottom: 1.5rem; color: var(--brand-color); }
+.login-card input { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 0.25rem; font-size: 1rem; }
+.login-card button { width: 100%; padding: 0.75rem; margin-top: 1rem; background: var(--brand-color); border: none; border-radius: 0.25rem; color: #fff; font-size: 1rem; cursor: pointer; }
+.login-card button:hover { filter: brightness(0.9); }
+.login-card .forgot { display: block; margin-top: 1rem; font-size: 0.85rem; color: var(--brand-color); text-decoration: none; }
+.login-card .forgot:hover { text-decoration: underline; }
+/* Navbar */
+.navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--card-bg); display: flex; align-items: center; padding: 0 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 1000; }
+.navbar .brand { font-size: 1.25rem; color: var(--brand-color); flex-grow: 1; }
+.navbar .toggle-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+.nav-desktop a { margin-left: 1rem; color: var(--text-color); text-decoration: none; font-size: 0.95rem; }
+.nav-desktop a:hover { text-decoration: underline; }
+/* Main Wrapper */
+.main-wrapper { display: flex; padding-top: var(--header-height); }
+.sidebar { width: var(--sidebar-width); background: var(--brand-color); color: #fff; height: calc(100vh - var(--header-height)); padding: 1rem; position: fixed; top: var(--header-height); left: 0; overflow-y: auto; transition: transform 0.3s ease; }
+.sidebar a { display: block; padding: 0.5rem 0; color: #fff; text-decoration: none; font-size: 0.95rem; }
+.sidebar a:hover { text-decoration: underline; }
+.content { margin-left: var(--sidebar-width); padding: 1.5rem; flex: 1; }
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar .toggle-btn { display: block; }
+  .nav-desktop { display: none; }
+  .sidebar { transform: translateX(-100%); position: fixed; }
+  .sidebar.active { transform: translateX(0); }
+  .content { margin-left: 0; }
+}

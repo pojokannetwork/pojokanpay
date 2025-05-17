@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PojokanPay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <header><h1>PojokanPay</h1></header>
+  <nav>
+    <button data-section="chat">Chat</button>
+    <button data-section="customers">Customers</button>
+    <button data-section="input">Input Customer</button>
+    <button data-section="employees">Employees</button>
+    <button data-section="positions">Positions</button>
+    <button data-section="roles">Access Rights</button>
+    <button data-section="assets">Assets</button>
+    <button data-section="import">Import/Export</button>
+  </nav>
+  <main>
+    <section id="chat"><h2>Chat</h2>
+      <div id="chat-window" class="chat-window"></div>
+      <input id="chat-input" placeholder="Type message..."><button id="chat-send">Send</button>
+    </section>
+    <section id="customers"><h2>Customers</h2>
+      <ul id="list-customers"></ul>
+    </section>
+    <section id="input"><h2>Input Customer</h2>
+      <form id="form-customers">
+        <input name="username" placeholder="Username"><input name="name" placeholder="Name"><button type="submit">Add</button>
+      </form>
+      <p id="cust-msg"></p>
+    </section>
+    <section id="employees"><h2>Employees</h2>
+      <ul id="list-employees"></ul>
+    </section>
+    <section id="positions"><h2>Positions</h2>
+      <ul id="list-positions"></ul>
+    </section>
+    <section id="roles"><h2>Access Rights</h2>
+      <ul id="list-roles"></ul>
+    </section>
+    <section id="assets"><h2>Assets</h2>
+      <ul id="list-assets"></ul>
+    </section>
+    <section id="import"><h2>Import / Export</h2>
+      <button id="export-customers">Export Customers</button>
+      <input type="file" id="import-file"><button id="import-btn">Import Customers</button>
+      <p id="import-msg"></p>
+    </section>
+  </main>
+  <footer>Made with ❤️ by AL & Team Pojokan Group</footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat - PojokanPay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">PojokanPay</div>
+    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+  </header>
+  <div class="main-wrapper">
+    <aside id="sidebar" class="sidebar">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/chat.html">Chat</a>
+      <a href="/logout">Logout</a>
+    </aside>
+    <main class="content">
+      <h2>Chat Support</h2>
+      <div id="chat-window" class="chat-window"></div>
+      <form id="chat-form" class="chat-form">
+        <input type="text" id="chat-input" placeholder="Tulis pesan..." autocomplete="off" required />
+        <button type="submit">Kirim</button>
+      </form>
+    </main>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('active');
+    }
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+    const windowEl = document.getElementById('chat-window');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const msg = input.value.trim();
+      if (!msg) return;
+      windowEl.innerHTML += `<div class="msg user">${msg}</div>`;
+      input.value = '';
+      const res = await fetch('/api/chat', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({message: msg})
+      });
+      const {reply} = await res.json();
+      windowEl.innerHTML += `<div class="msg bot">${reply}</div>`;
+      windowEl.scrollTop = windowEl.scrollHeight;
+    });
+  </script>

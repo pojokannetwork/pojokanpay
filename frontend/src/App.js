@@ -1,27 +1,32 @@
-
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import SettingsPage from './components/SettingsPage';
-import UserManagementPage from './components/UserManagementPage';
-
-const App = () => {
-    return (
-        <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li><Link to="/settings">Settings</Link></li>
-                        <li><Link to="/users">User Management</Link></li>
-                    </ul>
-                </nav>
-                <Routes>
-                    <Route path="/settings" element={<SettingsPage />} />
-                    <Route path="/users" element={<UserManagementPage />} />
-                    <Route path="/" element={<h1>Welcome to PojokanPay Admin Dashboard</h1>} />
-                </Routes>
-            </div>
-        </Router>
-    );
-};
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Chat from './components/Chat';
+import ImportExport from './components/ImportExport';
+import InputCustomer from './components/InputCustomer';
+import CustomersDashboard from './components/CustomersDashboard';
+import EmployeesDashboard from './components/EmployeesDashboard';
+import Positions from './components/Positions';
+import AccessRights from './components/AccessRights';
+import Assets from './components/Assets';
+import Footer from './components/Footer';
+function App(){
+  return(
+    <Router>
+      <nav style={{padding:10,background:'#eef'}}>
+        <Link to="/">Chat</Link> | <Link to="/customers">Customers</Link> | <Link to="/input-customer">Input</Link> | <Link to="/employees">Employees</Link> | <Link to="/positions">Positions</Link> | <Link to="/access-rights">Access Rights</Link> | <Link to="/assets">Assets</Link> | <Link to="/import-export">Import/Export</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Chat/>}/>
+        <Route path="/customers" element={<CustomersDashboard/>}/>
+        <Route path="/input-customer" element={<InputCustomer/>}/>
+        <Route path="/employees" element={<EmployeesDashboard/>}/>
+        <Route path="/positions" element={<Positions/>}/>
+        <Route path="/access-rights" element={<AccessRights/>}/>
+        <Route path="/assets" element={<Assets/>}/>
+        <Route path="/import-export" element={<ImportExport/>}/>
+      </Routes>
+      <Footer/>
+    </Router>
+  );
+}
 export default App;

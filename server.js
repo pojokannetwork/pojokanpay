@@ -1,29 +1,43 @@
-
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const { Low, JSONFile } = require('lowdb');
+const path = require('path');
+
 const app = express();
-const port = process.env.PORT || 3000;
-
-require('dotenv').config();
-const sequelize = require('./config/database');
-
-// Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('frontend'));
+app.use(express.static('public'));
 
-// Routes
-app.use('/api/settings', require('./routes/settings'));
-app.use('/api/whatsapp', require('./routes/whatsapp_route'));
-app.use('/api/mobile', require('./routes/mobile_api_route'));
+// Setup lowdb
+const { JSONFile } = require('lowdb')
+const file = path.join(__dirname, 'db.json');
+const adapter = new JSONFile(file);
+const db = new Low(adapter);
+async function initDB() {
+  await db.read();
+  db.data = db.data || { customers: [], employees: [], positions: [], roles: [], assets: [] };
+  await db.write();
+}
+initDB();
 
-// DB sync
-sequelize.sync().then(() => {
-    console.log('Database connected and synced.');
+// CRUD endpoints generator
+const resources = ['customers', 'employees', 'positions', 'roles', 'assets'];
+resources.forEach(resource => {
+  app.get('/api/' + resource, async (req, res) => {
+    await db.read();
+    res.json(db.data[resource]);
+  });
+  app.post('/api/' + resource, async (req, res) => {
+    await db.read();
+    const item = req.body;
+    item.id = Date.now();
+    db.data[resource].push(item);
+    await db.write();
+    res.json(item);
+  });
 });
 
 // Start server
-app.listen(port, () => {
-    console.log(`PojokanPay running at http://localhost:${port}`);
-});
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server listening on port ${port}`));
